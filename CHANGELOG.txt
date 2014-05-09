@@ -1,0 +1,56 @@
+============================
+Modul Om_Watermark Changelog
+============================
+
+Version 1.0.2 stable (2014-02-10)
+---------------------------------
+- Added: support for contao 3.2.x
+- Fixed: .htaccess block files within directory assets
+- Fixed: error when margins are empty 
+- Fixed: error if no watermark
+
+
+Version 1.0.1 stable (2013-09-10)
+---------------------------------
+- Added: support for adding watermarks in file management
+
+
+Version 1.0.0 beta2 (2013-08-02)
+---------------------------------
+- Added: support for frontend forms, via hook 'myProcessFormData'
+
+
+Version 1.0.0 beta1 (2013-01-01)
+---------------------------------
+- Added: support for contao 3.0
+- Added: multiple watermarks now possible 
+
+
+Version 0.0.1 rc2 (2012-07-09)
+---------------------------------
+- Fixed: problem, if installation is in a subdirectory
+
+
+Version 0.0.1 rc1 (2011-11-29)
+---------------------------------
+- Added: option to overwrite existing files
+- Added: translation for error messages
+- Fixed: wrong extension to new images
+
+
+Version 0.0.1 alpha3 (2011-09-20)
+---------------------------------
+- Fixed: delete property transparency and use imagecopy instead of imagecopymerge to avoid a transparency problem (instead use the transparency in the watermark)
+
+
+Version 0.0.1 alpha2 (2011-09-13)
+---------------------------------
+- Added: english languages files
+- Added: recursive function of the directory features
+- Fixed: problem with the quality feature
+- Fixed: problem with uppercase in file extensions
+
+
+Version 0.0.1 alpha1 (2011-09-11)
+---------------------------------
+- first release
