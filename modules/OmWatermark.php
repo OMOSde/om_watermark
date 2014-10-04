@@ -80,19 +80,19 @@ class OmWatermark extends \Contao\System {
    */
   public function omGenerate($arrFiles = array(), $intType = OM_WATERMARK_TYPE_BACKEND)
   {
-    $arrWatermarks = \OmWatermarksModel::findBy('published', 1);
+    $objWatermarks = \OmWatermarksModel::findBy('published', 1);
 
     // check object
-    if (!is_object($arrWatermarks))
+    if (!is_object($objWatermarks))
     {
       return;
     }
 
     // get through all active watermarks
-    while ($arrWatermarks->next())
+    while ($objWatermarks->next())
     {
-      $objDirectories = \FilesModel::findMultipleByIds(deserialize($arrWatermarks->directories));
-      $objWatermark   = \FilesModel::findById($arrWatermarks->watermark);
+      $objDirectories = \FilesModel::findMultipleByIds(deserialize($objWatermarks->directories));
+      $objWatermark   = \FilesModel::findById($objWatermarks->watermark);
       
       // walk through all uploaded files
       foreach ($arrFiles as $file)
@@ -104,6 +104,7 @@ class OmWatermark extends \Contao\System {
         $arrExtensions = array('.jpg', '.gif', '.png');
         
         // create array with directories
+        $arrDirectories = array();
         while ($objDirectories->next())
         {
           $arrDirectories[] = $objDirectories->row();
@@ -166,10 +167,10 @@ class OmWatermark extends \Contao\System {
               // get watermark values
               $intWatermarkWidth  = imagesx($resWatermark);
               $intWatermarkHeight = imagesy($resWatermark);
-              $arrMargin          = deserialize($arrWatermarks->margins);
+              $arrMargin          = deserialize($objWatermarks->margins);
                             
               // calculate position
-              switch ($arrWatermarks->position) {
+              switch ($objWatermarks->position) {
                 case 'top-left':
                   $intWatermarkPosX   = intval($arrMargin['left']);
                   $intWatermarkPosY   = intval($arrMargin['top']);
@@ -222,7 +223,7 @@ class OmWatermark extends \Contao\System {
               if (!file_exists($strRoot . $newFile))
               {
                 // save new image
-                imagejpeg($resNewPicture, $strRoot . $newFile, $arrWatermarks->quality);
+                imagejpeg($resNewPicture, $strRoot . $newFile, $objWatermarks->quality);
                 
                 // update hash in tl_files
                 $objFile = \FilesModel::findByPath($file);
@@ -241,7 +242,7 @@ class OmWatermark extends \Contao\System {
                 }                
                 
                 // write log?
-                if ($arrWatermarks->log) {
+                if ($objWatermarks->log) {
                   
                   // log success
                   $this->log($GLOBALS['TL_LANG']['om_watermark']['created'] . ': ' . $newFile, 'OmWatermarker - omPostUpload()', TL_FILES);
@@ -249,20 +250,20 @@ class OmWatermark extends \Contao\System {
               } else {
                 
                 // overwrite existing file?
-                if ($arrWatermarks->overwrite)
+                if ($objWatermarks->overwrite)
                 {
                   // save new image
-                  imagejpeg($resNewPicture, $this->Environment->documentRoot . $GLOBALS['TL_CONFIG']['websitePath'] . '/' . $newFile, $arrWatermarks->quality);                
+                  imagejpeg($resNewPicture, $this->Environment->documentRoot . $GLOBALS['TL_CONFIG']['websitePath'] . '/' . $newFile, $objWatermarks->quality);                
                   
                   // write log?
-                  if ($arrWatermarks->log) {
+                  if ($objWatermarks->log) {
                     
                     // log success
                     $this->log($GLOBALS['TL_LANG']['om_watermark']['created'] . ': ' . $newFile, 'OmWatermarker - omPostUpload()', TL_FILES);
                   }
                 } else {
                   // write log?
-                  if ($arrWatermarks->log) {
+                  if ($objWatermarks->log) {
                     
                     // log failure
                     $this->log($GLOBALS['TL_LANG']['om_watermark']['exists'] . ': ' . $newFile, 'OmWatermarker - omPostUpload()', TL_ERROR);

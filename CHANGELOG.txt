@@ -2,6 +2,11 @@
 Modul Om_Watermark Changelog
 ============================
 
+Version 1.0.3 stable (2014-10-04)
+---------------------------------
+- Fixed: multiple watermarks are not working correct (github #2)
+
+
 Version 1.0.2 stable (2014-02-10)
 ---------------------------------
 - Added: support for contao 3.2.x
