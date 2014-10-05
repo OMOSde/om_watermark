@@ -95,6 +95,7 @@ class OmWatermark extends \Contao\System {
       $objWatermark   = \FilesModel::findById($objWatermarks->watermark);
       
       // walk through all uploaded files
+      $arrDirectories = array();      
       foreach ($arrFiles as $file)
       {
         // check extension
@@ -104,7 +105,6 @@ class OmWatermark extends \Contao\System {
         $arrExtensions = array('.jpg', '.gif', '.png');
         
         // create array with directories
-        $arrDirectories = array();
         while ($objDirectories->next())
         {
           $arrDirectories[] = $objDirectories->row();
