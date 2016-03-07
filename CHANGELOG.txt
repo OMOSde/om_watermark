@@ -2,6 +2,11 @@
 Modul Om_Watermark Changelog
 ============================
 
+Version 1.0.4 stable (2014-10-05)
+---------------------------------
+Fixed: upload multiple files, only first file has a watermark (github #4)
+
+
 Version 1.0.3 stable (2014-10-04)
 ---------------------------------
 - Fixed: Revise README.md (github #3)
